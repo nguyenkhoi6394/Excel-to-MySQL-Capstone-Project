@@ -1,0 +1,522 @@
+\documentclass[]{article}
+\usepackage{lmodern}
+\usepackage{amssymb,amsmath}
+\usepackage{ifxetex,ifluatex}
+\usepackage{fixltx2e} % provides \textsubscript
+\ifnum 0\ifxetex 1\fi\ifluatex 1\fi=0 % if pdftex
+  \usepackage[T1]{fontenc}
+  \usepackage[utf8]{inputenc}
+\else % if luatex or xelatex
+  \ifxetex
+    \usepackage{mathspec}
+  \else
+    \usepackage{fontspec}
+  \fi
+  \defaultfontfeatures{Ligatures=TeX,Scale=MatchLowercase}
+\fi
+% use upquote if available, for straight quotes in verbatim environments
+\IfFileExists{upquote.sty}{\usepackage{upquote}}{}
+% use microtype if available
+\IfFileExists{microtype.sty}{%
+\usepackage{microtype}
+\UseMicrotypeSet[protrusion]{basicmath} % disable protrusion for tt fonts
+}{}
+\usepackage[margin=1in]{geometry}
+\usepackage{hyperref}
+\hypersetup{unicode=true,
+            pdftitle={Watershed Capstone Project - Price Optimization},
+            pdfborder={0 0 0},
+            breaklinks=true}
+\urlstyle{same}  % don't use monospace font for urls
+\usepackage{color}
+\usepackage{fancyvrb}
+\newcommand{\VerbBar}{|}
+\newcommand{\VERB}{\Verb[commandchars=\\\{\}]}
+\DefineVerbatimEnvironment{Highlighting}{Verbatim}{commandchars=\\\{\}}
+% Add ',fontsize=\small' for more characters per line
+\usepackage{framed}
+\definecolor{shadecolor}{RGB}{248,248,248}
+\newenvironment{Shaded}{\begin{snugshade}}{\end{snugshade}}
+\newcommand{\AlertTok}[1]{\textcolor[rgb]{0.94,0.16,0.16}{#1}}
+\newcommand{\AnnotationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\AttributeTok}[1]{\textcolor[rgb]{0.77,0.63,0.00}{#1}}
+\newcommand{\BaseNTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\BuiltInTok}[1]{#1}
+\newcommand{\CharTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\CommentTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\CommentVarTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ConstantTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ControlFlowTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\DataTypeTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{#1}}
+\newcommand{\DecValTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\DocumentationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\ErrorTok}[1]{\textcolor[rgb]{0.64,0.00,0.00}{\textbf{#1}}}
+\newcommand{\ExtensionTok}[1]{#1}
+\newcommand{\FloatTok}[1]{\textcolor[rgb]{0.00,0.00,0.81}{#1}}
+\newcommand{\FunctionTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\ImportTok}[1]{#1}
+\newcommand{\InformationTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\newcommand{\KeywordTok}[1]{\textcolor[rgb]{0.13,0.29,0.53}{\textbf{#1}}}
+\newcommand{\NormalTok}[1]{#1}
+\newcommand{\OperatorTok}[1]{\textcolor[rgb]{0.81,0.36,0.00}{\textbf{#1}}}
+\newcommand{\OtherTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{#1}}
+\newcommand{\PreprocessorTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textit{#1}}}
+\newcommand{\RegionMarkerTok}[1]{#1}
+\newcommand{\SpecialCharTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\SpecialStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\StringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\VariableTok}[1]{\textcolor[rgb]{0.00,0.00,0.00}{#1}}
+\newcommand{\VerbatimStringTok}[1]{\textcolor[rgb]{0.31,0.60,0.02}{#1}}
+\newcommand{\WarningTok}[1]{\textcolor[rgb]{0.56,0.35,0.01}{\textbf{\textit{#1}}}}
+\usepackage{graphicx,grffile}
+\makeatletter
+\def\maxwidth{\ifdim\Gin@nat@width>\linewidth\linewidth\else\Gin@nat@width\fi}
+\def\maxheight{\ifdim\Gin@nat@height>\textheight\textheight\else\Gin@nat@height\fi}
+\makeatother
+% Scale images if necessary, so that they will not overflow the page
+% margins by default, and it is still possible to overwrite the defaults
+% using explicit options in \includegraphics[width, height, ...]{}
+\setkeys{Gin}{width=\maxwidth,height=\maxheight,keepaspectratio}
+\IfFileExists{parskip.sty}{%
+\usepackage{parskip}
+}{% else
+\setlength{\parindent}{0pt}
+\setlength{\parskip}{6pt plus 2pt minus 1pt}
+}
+\setlength{\emergencystretch}{3em}  % prevent overfull lines
+\providecommand{\tightlist}{%
+  \setlength{\itemsep}{0pt}\setlength{\parskip}{0pt}}
+\setcounter{secnumdepth}{0}
+% Redefines (sub)paragraphs to behave more like sections
+\ifx\paragraph\undefined\else
+\let\oldparagraph\paragraph
+\renewcommand{\paragraph}[1]{\oldparagraph{#1}\mbox{}}
+\fi
+\ifx\subparagraph\undefined\else
+\let\oldsubparagraph\subparagraph
+\renewcommand{\subparagraph}[1]{\oldsubparagraph{#1}\mbox{}}
+\fi
+
+%%% Use protect on footnotes to avoid problems with footnotes in titles
+\let\rmarkdownfootnote\footnote%
+\def\footnote{\protect\rmarkdownfootnote}
+
+%%% Change title format to be more compact
+\usepackage{titling}
+
+% Create subtitle command for use in maketitle
+\providecommand{\subtitle}[1]{
+  \posttitle{
+    \begin{center}\large#1\end{center}
+    }
+}
+
+\setlength{\droptitle}{-2em}
+
+  \title{Watershed Capstone Project - Price Optimization}
+    \pretitle{\vspace{\droptitle}\centering\huge}
+  \posttitle{\par}
+    \author{}
+    \preauthor{}\postauthor{}
+    \date{}
+    \predate{}\postdate{}
+  
+
+\begin{document}
+\maketitle
+
+This is the code that I use to run predictive model for forecasted
+occupancy rate as a function of nightly rent price. I also use optim in
+order to find the short-term rent price that could optimize revenue for
+each single property, just like we use Solver in Excel.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df <-}\StringTok{ }\KeywordTok{read.csv}\NormalTok{(}\DataTypeTok{file =} \StringTok{"database.csv"}\NormalTok{, }\DataTypeTok{header=}\OtherTok{TRUE}\NormalTok{)}
+\KeywordTok{head}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   location property_type ws_property_id current_monthly_rent
+## 1    L9531            R6             W1                 1060
+## 2    L9533            R6            W10                 1200
+## 3    L1944            R2           W100                 3300
+## 4   L15257            R2           W101                 1400
+## 5   L15257            R6           W102                 2000
+## 6   L15257           R10           W103                 1600
+##   percentile_10th_price percentile_90th_price sample_nightly_rent_price
+## 1                   114                   153                       148
+## 2                   111                   149                       133
+## 3                   108                   610                       372
+## 4                   178                   533                       302
+## 5                   221                   617                       429
+## 6                   202                   646                       380
+##   occupancy_rate          city state zipcode apt_house num_bedrooms
+## 1           0.16   Chapel Hill    NC   27514 apartment            2
+## 2           0.35   Chapel Hill    NC   27517 apartment            2
+## 3           0.40 San Francisco    CA   94129 apartment            1
+## 4           0.36        Austin    TX   78702 apartment            1
+## 5           0.41        Austin    TX   78702 apartment            2
+## 6           0.41        Austin    TX   78702     house            1
+##   kitchen shared
+## 1       Y      N
+## 2       Y      N
+## 3       Y      N
+## 4       Y      N
+## 5       Y      N
+## 6       Y      N
+\end{verbatim}
+
+Our purpose is to predict occupancy rate using current variables, so
+let's run a simple prediction model with independent variable being
+sample\_nightly\_rent\_price.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model<-}\KeywordTok{lm}\NormalTok{(}\DataTypeTok{data=}\NormalTok{df, occupancy_rate }\OperatorTok{~}\StringTok{ }\NormalTok{sample_nightly_rent_price)}
+\KeywordTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = occupancy_rate ~ sample_nightly_rent_price, data = df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.40692 -0.10288 -0.00011  0.09632  0.46844 
+## 
+## Coefficients:
+##                             Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)                5.086e-01  2.121e-02  23.976  < 2e-16 ***
+## sample_nightly_rent_price -1.524e-04  5.373e-05  -2.837  0.00494 ** 
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1615 on 242 degrees of freedom
+## Multiple R-squared:  0.03219,    Adjusted R-squared:  0.02819 
+## F-statistic: 8.048 on 1 and 242 DF,  p-value: 0.004941
+\end{verbatim}
+
+This is obviously a very low-accurate model with R-squared being only a
+mere 3\%. Intuitively, each cities and each regions will have different
+range of rent prices. Renting a small bedromm at \$200/night is
+obviously too expensive in a small town at Montana; however, it could be
+considered as acceptable in a metropolis such as New York.
+
+Thus, to capture this effect, we should incorporate the different in
+living expenses at different regions into our model, which could be done
+by reflecting each rent price as a percentile vs.~prices of other
+properties in the same region. If \$200 is at 90 percentile in Montana
+and at 50 percentile in New York, it would be better for the regression
+model to predict.
+
+Thankfully, the given dataset allows us to do this practice.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{col<-}\KeywordTok{c}\NormalTok{(}\StringTok{"percentile_90th_price"}\NormalTok{,}\StringTok{"percentile_10th_price"}\NormalTok{,}\StringTok{"sample_nightly_rent_price"}\NormalTok{)}
+\NormalTok{dt<-df[col]}
+
+\NormalTok{vs10 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x) \{}\ControlFlowTok{if}\NormalTok{ (x[}\DecValTok{3}\NormalTok{]}\OperatorTok{>}\NormalTok{x[}\DecValTok{2}\NormalTok{]) \{}\DecValTok{1}\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}\DecValTok{0}\NormalTok{\}\}}
+\NormalTok{vs90 <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{ (x) \{}\ControlFlowTok{if}\NormalTok{ (x[}\DecValTok{3}\NormalTok{]}\OperatorTok{<}\NormalTok{x[}\DecValTok{1}\NormalTok{]) \{}\DecValTok{1}\NormalTok{\} }\ControlFlowTok{else}\NormalTok{ \{}\DecValTok{0}\NormalTok{\}\}}
+
+
+\NormalTok{dt}\OperatorTok{$}\NormalTok{vs10 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(dt,}\DecValTok{1}\NormalTok{,vs10) }\CommentTok{#check if sample rent price is higher than percentile 10}
+\NormalTok{dt}\OperatorTok{$}\NormalTok{vs90 <-}\StringTok{ }\KeywordTok{apply}\NormalTok{(dt,}\DecValTok{1}\NormalTok{,vs90) }\CommentTok{#check if sample rent price is lower than percentile 90}
+
+\KeywordTok{c}\NormalTok{(}\KeywordTok{sum}\NormalTok{(dt}\OperatorTok{$}\NormalTok{vs90),}\KeywordTok{sum}\NormalTok{(dt}\OperatorTok{$}\NormalTok{vs10))}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## [1] 243 243
+\end{verbatim}
+
+Since the total dataset has 243 instances, this indicates that all the
+sample rent price is within (10,90) percentile.
+
+We can then convert the sample nightly rent price into percentile using
+below formula:
+
+sample\_percentile\_price of a given property (x) = 0.1+0.8*(range
+between x and 10th percentile )/(range between 90 and 10 percentile)
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\OperatorTok{$}\NormalTok{percentile_90th_vs_10th =df}\OperatorTok{$}\NormalTok{percentile_90th_price}\OperatorTok{-}\NormalTok{df}\OperatorTok{$}\NormalTok{percentile_10th_price}
+\NormalTok{df}\OperatorTok{$}\NormalTok{sample_vs_10th <-}\StringTok{ }\NormalTok{df}\OperatorTok{$}\NormalTok{sample_nightly_rent_price}\OperatorTok{-}\NormalTok{df}\OperatorTok{$}\NormalTok{percentile_10th_price}
+\NormalTok{df}\OperatorTok{$}\NormalTok{sample_price_percentile <-}\StringTok{ }\FloatTok{0.1+0.8}\OperatorTok{*}\NormalTok{df}\OperatorTok{$}\NormalTok{sample_vs_10th}\OperatorTok{/}\NormalTok{df}\OperatorTok{$}\NormalTok{percentile_90th_vs_10th}
+
+\KeywordTok{head}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   location property_type ws_property_id current_monthly_rent
+## 1    L9531            R6             W1                 1060
+## 2    L9533            R6            W10                 1200
+## 3    L1944            R2           W100                 3300
+## 4   L15257            R2           W101                 1400
+## 5   L15257            R6           W102                 2000
+## 6   L15257           R10           W103                 1600
+##   percentile_10th_price percentile_90th_price sample_nightly_rent_price
+## 1                   114                   153                       148
+## 2                   111                   149                       133
+## 3                   108                   610                       372
+## 4                   178                   533                       302
+## 5                   221                   617                       429
+## 6                   202                   646                       380
+##   occupancy_rate          city state zipcode apt_house num_bedrooms
+## 1           0.16   Chapel Hill    NC   27514 apartment            2
+## 2           0.35   Chapel Hill    NC   27517 apartment            2
+## 3           0.40 San Francisco    CA   94129 apartment            1
+## 4           0.36        Austin    TX   78702 apartment            1
+## 5           0.41        Austin    TX   78702 apartment            2
+## 6           0.41        Austin    TX   78702     house            1
+##   kitchen shared percentile_90th_vs_10th sample_vs_10th
+## 1       Y      N                      39             34
+## 2       Y      N                      38             22
+## 3       Y      N                     502            264
+## 4       Y      N                     355            124
+## 5       Y      N                     396            208
+## 6       Y      N                     444            178
+##   sample_price_percentile
+## 1               0.7974359
+## 2               0.5631579
+## 3               0.5207171
+## 4               0.3794366
+## 5               0.5202020
+## 6               0.4207207
+\end{verbatim}
+
+Now, let's rerun the regression model
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model<-}\KeywordTok{lm}\NormalTok{(}\DataTypeTok{data=}\NormalTok{df, occupancy_rate }\OperatorTok{~}\StringTok{ }\NormalTok{sample_price_percentile)}
+\KeywordTok{summary}\NormalTok{(model)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = occupancy_rate ~ sample_price_percentile, data = df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.37493 -0.06930  0.00154  0.07194  0.30655 
+## 
+## Coefficients:
+##                         Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)              0.85167    0.02560   33.27   <2e-16 ***
+## sample_price_percentile -0.79359    0.04922  -16.12   <2e-16 ***
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.114 on 242 degrees of freedom
+## Multiple R-squared:  0.5179, Adjusted R-squared:  0.5159 
+## F-statistic:   260 on 1 and 242 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+I also tested inputting number of bedrooms into our model. However, this
+variable does not yield statistically significance. Perhaps the reason
+is that the rent price already factors the number of bedrooms, thus
+incorporating such new feature does not help much to our prediction.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model_}\DecValTok{1}\NormalTok{<-}\KeywordTok{lm}\NormalTok{(}\DataTypeTok{data=}\NormalTok{df, occupancy_rate }\OperatorTok{~}\StringTok{ }\NormalTok{sample_price_percentile }\OperatorTok{+}\StringTok{ }\NormalTok{num_bedrooms)}
+\KeywordTok{summary}\NormalTok{(model_}\DecValTok{1}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+## 
+## Call:
+## lm(formula = occupancy_rate ~ sample_price_percentile + num_bedrooms, 
+##     data = df)
+## 
+## Residuals:
+##      Min       1Q   Median       3Q      Max 
+## -0.37028 -0.07003  0.00165  0.07053  0.31110 
+## 
+## Coefficients:
+##                          Estimate Std. Error t value Pr(>|t|)    
+## (Intercept)              0.865209   0.033469  25.851   <2e-16 ***
+## sample_price_percentile -0.793088   0.049287 -16.091   <2e-16 ***
+## num_bedrooms            -0.009193   0.014615  -0.629     0.53    
+## ---
+## Signif. codes:  0 '***' 0.001 '**' 0.01 '*' 0.05 '.' 0.1 ' ' 1
+## 
+## Residual standard error: 0.1141 on 241 degrees of freedom
+## Multiple R-squared:  0.5187, Adjusted R-squared:  0.5147 
+## F-statistic: 129.9 on 2 and 241 DF,  p-value: < 2.2e-16
+\end{verbatim}
+
+I also want to plot QQ chart and residual plot to test if our univariate
+model follows the assumption of linear regression.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{model.res<-}\KeywordTok{resid}\NormalTok{(model);}
+
+\KeywordTok{plot}\NormalTok{(df}\OperatorTok{$}\NormalTok{sample_price_percentile, model.res, }
+        \DataTypeTok{ylab=}\StringTok{"Residuals"}\NormalTok{, }\DataTypeTok{xlab=}\StringTok{"Sample Price Percentile"}\NormalTok{) }
+\KeywordTok{abline}\NormalTok{(}\DecValTok{0}\NormalTok{,}\DecValTok{0}\NormalTok{);}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Using_Optim_for_a_dataframe_in_R_Github_files/figure-latex/unnamed-chunk-7-1.pdf}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{qqnorm}\NormalTok{(model.res, }\DataTypeTok{pch =} \DecValTok{1}\NormalTok{, }\DataTypeTok{frame =} \OtherTok{FALSE}\NormalTok{)}
+\KeywordTok{qqline}\NormalTok{(model.res, }\DataTypeTok{col =} \StringTok{"steelblue"}\NormalTok{, }\DataTypeTok{lwd =} \DecValTok{2}\NormalTok{)}
+\end{Highlighting}
+\end{Shaded}
+
+\includegraphics{Using_Optim_for_a_dataframe_in_R_Github_files/figure-latex/unnamed-chunk-7-2.pdf}
+
+Though the R-squared is only moderate, at 55\%, considering current
+available dataset and other more important tasks in this analysis, I
+decide to go with this univariate model.
+
+Our next step is to find optimal rent price for each property that can
+maximize our revenue. Higher rent price could lead to higher income for
+us, but it would also lower occupancy rate.
+
+This requirement can easily be done in Excel Solver; nonetheless,
+running optimization for each property (total 243 instances) is an
+exhausting practice. Consequently, we need to use optim function in R.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\CommentTok{# Firsly, we need to create a function to calculate revenue, based on predicted occupancy rate and nightly_rent_price}
+
+\NormalTok{revenue <-}\StringTok{ }\ControlFlowTok{function}\NormalTok{(data,par)\{}
+\NormalTok{                            par_vs_10th <-}\StringTok{ }\NormalTok{par}\OperatorTok{-}\NormalTok{data}\OperatorTok{$}\NormalTok{percentile_10th_price}
+\NormalTok{                            normalized_price <-}\FloatTok{0.1+0.8}\OperatorTok{*}\NormalTok{par_vs_10th}\OperatorTok{/}\NormalTok{data}\OperatorTok{$}\NormalTok{percentile_90th_vs_10th}
+\NormalTok{                            fcst_occupancy <-}\KeywordTok{coef}\NormalTok{(model)[}\StringTok{'(Intercept)'}\NormalTok{]}\OperatorTok{+}\KeywordTok{coef}\NormalTok{(model)[}\StringTok{'sample_price_percentile'}\NormalTok{]}\OperatorTok{*}\NormalTok{normalized_price}
+\NormalTok{                            fcst_st_revenue <-fcst_occupancy}\OperatorTok{*}\DecValTok{365}\OperatorTok{*}\NormalTok{par}
+\NormalTok{                            fcst_st_revenue}
+\NormalTok{\}}
+
+\CommentTok{# Then create an optimization function and run for each row in df.}
+
+\ControlFlowTok{for}\NormalTok{ (i }\ControlFlowTok{in} \DecValTok{1}\OperatorTok{:}\KeywordTok{nrow}\NormalTok{(df))   \{df[i,}\StringTok{'optimized_price'}\NormalTok{] <-}
+\StringTok{                                                }\KeywordTok{optim}\NormalTok{(}\DecValTok{122}\NormalTok{,revenue,}\DataTypeTok{data=}\NormalTok{df[i,],}\DataTypeTok{method=}\StringTok{"L-BFGS-B"}\NormalTok{,      }\DataTypeTok{control=}\KeywordTok{list}\NormalTok{(}\DataTypeTok{fnscale=}\OperatorTok{-}\DecValTok{1}\NormalTok{),}\DataTypeTok{lower=}\NormalTok{df[i,}\StringTok{'percentile_10th_price'}\NormalTok{]) \}}
+\CommentTok{#122 is an initialized value}
+\CommentTok{# We need to input lower parameters to ensure that the optimal rent price does not fall lower than 10th percentile}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\KeywordTok{head}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   location property_type ws_property_id current_monthly_rent
+## 1    L9531            R6             W1                 1060
+## 2    L9533            R6            W10                 1200
+## 3    L1944            R2           W100                 3300
+## 4   L15257            R2           W101                 1400
+## 5   L15257            R6           W102                 2000
+## 6   L15257           R10           W103                 1600
+##   percentile_10th_price percentile_90th_price sample_nightly_rent_price
+## 1                   114                   153                       148
+## 2                   111                   149                       133
+## 3                   108                   610                       372
+## 4                   178                   533                       302
+## 5                   221                   617                       429
+## 6                   202                   646                       380
+##   occupancy_rate          city state zipcode apt_house num_bedrooms
+## 1           0.16   Chapel Hill    NC   27514 apartment            2
+## 2           0.35   Chapel Hill    NC   27517 apartment            2
+## 3           0.40 San Francisco    CA   94129 apartment            1
+## 4           0.36        Austin    TX   78702 apartment            1
+## 5           0.41        Austin    TX   78702 apartment            2
+## 6           0.41        Austin    TX   78702     house            1
+##   kitchen shared percentile_90th_vs_10th sample_vs_10th
+## 1       Y      N                      39             34
+## 2       Y      N                      38             22
+## 3       Y      N                     502            264
+## 4       Y      N                     355            124
+## 5       Y      N                     396            208
+## 6       Y      N                     444            178
+##   sample_price_percentile optimized_price
+## 1               0.7974359        114.0000
+## 2               0.5631579        111.0000
+## 3               0.5207171        359.3366
+## 4               0.3794366        304.9253
+## 5               0.5202020        351.3632
+## 6               0.4207207        371.0587
+\end{verbatim}
+
+We then need to convert the optimized price in dollar values into
+percentiles as well. Then use the newly calculated variable to predict
+the occupancy rate.
+
+\begin{Shaded}
+\begin{Highlighting}[]
+\NormalTok{df}\OperatorTok{$}\NormalTok{normalized_optimized_price<-}\FloatTok{0.1+0.8}\OperatorTok{*}\NormalTok{(df}\OperatorTok{$}\NormalTok{optimized_price}\OperatorTok{-}\NormalTok{df}\OperatorTok{$}\NormalTok{percentile_10th_price)}\OperatorTok{/}\NormalTok{(df}\OperatorTok{$}\NormalTok{percentile_90th_vs_10th)}
+
+\NormalTok{new <-}\KeywordTok{data.frame}\NormalTok{(}\DataTypeTok{sample_price_percentile=}\NormalTok{df}\OperatorTok{$}\NormalTok{normalized_optimized_price)}
+\NormalTok{df}\OperatorTok{$}\NormalTok{forecast_occupancy <-}\StringTok{ }\KeywordTok{predict.lm}\NormalTok{(model,}\DataTypeTok{newdata=}\NormalTok{new)}
+
+\KeywordTok{head}\NormalTok{(df)}
+\end{Highlighting}
+\end{Shaded}
+
+\begin{verbatim}
+##   location property_type ws_property_id current_monthly_rent
+## 1    L9531            R6             W1                 1060
+## 2    L9533            R6            W10                 1200
+## 3    L1944            R2           W100                 3300
+## 4   L15257            R2           W101                 1400
+## 5   L15257            R6           W102                 2000
+## 6   L15257           R10           W103                 1600
+##   percentile_10th_price percentile_90th_price sample_nightly_rent_price
+## 1                   114                   153                       148
+## 2                   111                   149                       133
+## 3                   108                   610                       372
+## 4                   178                   533                       302
+## 5                   221                   617                       429
+## 6                   202                   646                       380
+##   occupancy_rate          city state zipcode apt_house num_bedrooms
+## 1           0.16   Chapel Hill    NC   27514 apartment            2
+## 2           0.35   Chapel Hill    NC   27517 apartment            2
+## 3           0.40 San Francisco    CA   94129 apartment            1
+## 4           0.36        Austin    TX   78702 apartment            1
+## 5           0.41        Austin    TX   78702 apartment            2
+## 6           0.41        Austin    TX   78702     house            1
+##   kitchen shared percentile_90th_vs_10th sample_vs_10th
+## 1       Y      N                      39             34
+## 2       Y      N                      38             22
+## 3       Y      N                     502            264
+## 4       Y      N                     355            124
+## 5       Y      N                     396            208
+## 6       Y      N                     444            178
+##   sample_price_percentile optimized_price normalized_optimized_price
+## 1               0.7974359        114.0000                  0.1000000
+## 2               0.5631579        111.0000                  0.1000000
+## 3               0.5207171        359.3366                  0.5005365
+## 4               0.3794366        304.9253                  0.3860289
+## 5               0.5202020        351.3632                  0.3633599
+## 6               0.4207207        371.0587                  0.4046103
+##   forecast_occupancy
+## 1          0.7723132
+## 2          0.7723132
+## 3          0.4544499
+## 4          0.5453224
+## 5          0.5633124
+## 6          0.5305763
+\end{verbatim}
+
+
+\end{document}
