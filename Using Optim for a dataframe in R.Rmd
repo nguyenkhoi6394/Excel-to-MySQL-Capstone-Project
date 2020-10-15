@@ -1,12 +1,7 @@
 ---
 title: 'Watershed Capstone Project - Price Optimization '
-output:
-  html_document:
-    df_print: paged
-  pdf_document: default
-  word_document: default
+output:  html_document
 ---
-
 
 This is the code that I use to run predictive model for forecasted occupancy rate as a function of nightly rent price. I also use optim in order to find the short-term rent price that could optimize revenue for each single property, just like we use Solver in Excel. 
 
