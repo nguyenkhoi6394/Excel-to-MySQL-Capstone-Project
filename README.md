@@ -24,12 +24,12 @@ The project capstone contains 4 different documents:
 | Name                                        | Description                                           |
 | ------------------------------------------- | ----------------------------------------------------- |
 | [Technical details] | Detailed description of methods to predict profit, cash-flow and properties to convert into short-term rent . |
-| [R-code][rcode] | R-code showing how to do linear regression and run optim function to find rent price that can optimize rental profit |
-| [Tableau story][tableau] | Tableau story on the final findings, with customized parameters for readers to play around . |
+| [R-code][r-code] | R-code showing how to do linear regression and run optim function to find rent price that can optimize rental profit |
+| [Tableau story][tableau-story] | Tableau story on the final findings, with customized parameters for readers to play around . |
 
 [technical]: https://nguyenkhoi6394.github.io/Excel-to-MySQL-Capstone-Project/Technical details about Watershed Short-term Property analysis.pdf/
-[rcode]: https://nguyenkhoi6394.github.io/Excel-to-MySQL-Capstone-Project/Using_Optim_for_a_dataframe_in_R.html/
-[tableau]: https://public.tableau.com/profile/nguyen.huynh.anh.khoi#!/vizhome/CapstoneProject_WatershedShort-termBusinessProposal/WatershedBusinessProposal/
+[r-code]: https://nguyenkhoi6394.github.io/Excel-to-MySQL-Capstone-Project/Using_Optim_for_a_dataframe_in_R.html/
+[tableau-story]: https://public.tableau.com/profile/nguyen.huynh.anh.khoi#!/vizhome/CapstoneProject_WatershedShort-termBusinessProposal/WatershedBusinessProposal/
 
 | Name                                        | Description                                           |
 | ------------------------------------------- | ----------------------------------------------------- |
