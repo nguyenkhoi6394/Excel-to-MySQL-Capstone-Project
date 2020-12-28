@@ -1,6 +1,6 @@
 # Excel-to-MySQL-Capstone-Project
 
- For this course, I will complete a Capstone Project using data analysis to recommend a method for improving profits for a company, Watershed Property Management, Inc. Watershed is responsible for managing thousands of residential rental properties throughout the United States. My job is to persuade Watershed’s management team to pursue a new strategy for managing its properties that will increase their profits.
+ In this specialization, I will complete a Capstone Project using data analysis to recommend a method for improving profits for a company, Watershed Property Management, Inc. Watershed is responsible for managing thousands of residential rental properties throughout the United States. My job is to persuade Watershed’s management team to pursue a new strategy for managing its properties that will increase their profits.
  
  Watershed currently has a time-sensitive opportunity to explore the short-term rental market with one of its top property owners, who has expressed interest in working with Watershed to convert some of its long-term rental properties to short-term rental properties. They require me, as their business data analyst, to:
 
@@ -19,5 +19,16 @@ I will also have to synthesize this information into a succinct business recomme
 
 Should Watershed enter the short-term rental market using some of this client’s property portfolio, or not? If so, which properties should be converted first? 
 
+The project capstone contains 4 different documents:
+
+| Name                                        | Description                                           |
+| ------------------------------------------- | ----------------------------------------------------- |
+| [Technical details][technical] | Detailed description of methods to predict profit, cash-flow and properties to convert into short-term rent . |
+| [R-code][rcode] | R-code showing how to do linear regression and run optim function to find rent price that can optimize rental profit |
+| [Tableau story][tableau] | Tableau story on the final findings, with customized parameters for readers to play around . |
+
+[technical]: https://nguyenkhoi6394.github.io/Excel-to-MySQL-Capstone-Project/Technical details about Watershed Short-term Property analysis.pdf
+[rcode]: https://nguyenkhoi6394.github.io/Excel-to-MySQL-Capstone-Project/Using_Optim_for_a_dataframe_in_R.html
+[tableau]: https://public.tableau.com/profile/nguyen.huynh.anh.khoi#!/vizhome/CapstoneProject_WatershedShort-termBusinessProposal/WatershedBusinessProposal
  
  
