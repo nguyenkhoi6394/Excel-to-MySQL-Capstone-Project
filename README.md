@@ -27,5 +27,3 @@ The project capstone contains 4 different documents:
 | [R-code](https://nguyenkhoi6394.github.io/Excel-to-MySQL-Capstone-Project/Using_Optim_for_a_dataframe_in_R.html) | R-code showing how to do linear regression and run optim function to find rent price that can optimize rental profit |
 | [Tableau story](https://public.tableau.com/profile/nguyen.huynh.anh.khoi#!/vizhome/CapstoneProject_WatershedShort-termBusinessProposal/WatershedBusinessProposal) | Tableau story on the final findings, with customized parameters for readers to play around . |
 
-[technical]: https://nguyenkhoi6394.github.io/Excel-to-MySQL-Capstone-Project/Technical details about Watershed Short-term Property analysis.pdf/
-[r-code]: https://nguyenkhoi6394.github.io/Excel-to-MySQL-Capstone-Project/Using_Optim_for_a_dataframe_in_R.html/
