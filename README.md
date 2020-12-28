@@ -19,7 +19,7 @@ I will also have to synthesize this information into a succinct business recomme
 
 Should Watershed enter the short-term rental market using some of this client’s property portfolio, or not? If so, which properties should be converted first? 
 
-The project capstone contains 4 different documents:
+The project capstone contains 3 different documents:
 
 | Name                                        | Description                                           |
 | ------------------------------------------- | ----------------------------------------------------- |
